@@ -1,6 +1,7 @@
 :root{
     --O-color: #2196f3;
     --X-color: #f44336;
+    --E-color: #777;
 }
 
 *{
@@ -63,4 +64,30 @@ body{
 }
 .cell.X{
     background-color: var(--X-color);
+}
+
+footer {
+    text-align: center;
+}
+
+.winner-message{
+    margin: 2rem;
+}
+.winner-message span.O{
+    color: var(--O-color);
+}
+.winner-message span.X{
+    color: var(--X-color);
+}
+.winner-message span.E{
+    color: var(--E-color);
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 1.2rem;
 }

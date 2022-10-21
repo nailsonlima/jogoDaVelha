@@ -6,11 +6,12 @@ function TicTacToe() {
 
   const [board, setBoard] = useState(emptyBoard)
   const [currentPlayer, setCurrentPlayer] = useState("X");
-  const [winner, setWinner] = useState();
+  const [winner, setWinner] = useState(null);
 
 
   const handleCellClick = (index) =>{
     if(board[index] !== "") return;
+    if(winner) return;
 
     setBoard(board.map((item, iteIndex) => iteIndex === index ? currentPlayer : item));
     if(currentPlayer==="X"){
@@ -38,10 +39,23 @@ function TicTacToe() {
       if(cells.every(cell => cell==="O")) setWinner('O')
       if(cells.every(cell => cell==="X")) setWinner('X')
     })
+
+    checkDraw();
+  }
+
+  const checkDraw = ()=>{
+    if(board.every(item=> item !== "")){
+      setWinner("E")
+    }
   }
 
   useEffect(checkWinner, [board])
 
+  function resetGame(){
+    setCurrentPlayer("X");
+    setBoard(emptyBoard);
+    setWinner('')
+  }
 
   return (
     <main>
@@ -57,6 +71,21 @@ function TicTacToe() {
           </div>
         ))}
       </div>
+      {winner &&
+      <footer>
+        {winner === "E" ? 
+          <h2 className='winner-message'>
+            <span className={winner}>Empatou</span>
+          </h2>
+        :
+          <h2 className='winner-message'>
+            <span className={winner}>{winner}</span> venceu!
+          </h2>
+        }
+      <button onClick={resetGame}>Recomeçar Jogo</button>
+    </footer> 
+    }
+      
     </main>
   );
 }
